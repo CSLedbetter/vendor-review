@@ -1,0 +1,178 @@
+{
+  "VR-01": {
+    "tier": 1,
+    "checks": [
+      [
+        "pass",
+        "Evidence for the tier"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ],
+      [
+        "pass",
+        "Report freshness"
+      ],
+      [
+        "pass",
+        "Exceptions"
+      ],
+      [
+        "info",
+        "Subservice: Amazon Web Services"
+      ],
+      [
+        "info",
+        "Controls you own (CUECs)"
+      ],
+      [
+        "pass",
+        "Penetration test"
+      ]
+    ]
+  },
+  "VR-02": {
+    "tier": 2,
+    "checks": [
+      [
+        "fail",
+        "Auditor’s opinion"
+      ],
+      [
+        "fail",
+        "Exception in CC6.3"
+      ],
+      [
+        "fail",
+        "Exception in CC6.2"
+      ],
+      [
+        "warn",
+        "Categories in scope"
+      ],
+      [
+        "pass",
+        "Report freshness"
+      ]
+    ]
+  },
+  "VR-03": {
+    "tier": 2,
+    "checks": [
+      [
+        "warn",
+        "Type I report"
+      ],
+      [
+        "fail",
+        "AI training on your data"
+      ],
+      [
+        "info",
+        "Retention"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ]
+    ]
+  },
+  "VR-04": {
+    "tier": 2,
+    "checks": [
+      [
+        "fail",
+        "Report freshness"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ],
+      [
+        "pass",
+        "Scope match"
+      ]
+    ]
+  },
+  "VR-05": {
+    "tier": 3,
+    "checks": [
+      [
+        "pass",
+        "Evidence for the tier"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ],
+      [
+        "pass",
+        "Report freshness"
+      ]
+    ]
+  },
+  "VR-06": {
+    "tier": 1,
+    "checks": [
+      [
+        "fail",
+        "ISO certificate expiry"
+      ],
+      [
+        "warn",
+        "Scope match"
+      ],
+      [
+        "warn",
+        "Penetration test"
+      ],
+      [
+        "pass",
+        "Evidence for the tier"
+      ]
+    ]
+  },
+  "VR-07": {
+    "tier": 1,
+    "checks": [
+      [
+        "warn",
+        "Categories in scope"
+      ],
+      [
+        "warn",
+        "Exception in CC8.1"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ],
+      [
+        "pass",
+        "Penetration test"
+      ]
+    ]
+  },
+  "VR-08": {
+    "tier": 1,
+    "checks": [
+      [
+        "warn",
+        "Penetration test"
+      ],
+      [
+        "pass",
+        "Auditor’s opinion"
+      ],
+      [
+        "pass",
+        "Exceptions"
+      ],
+      [
+        "info",
+        "Subservice: Google Cloud"
+      ]
+    ]
+  }
+}

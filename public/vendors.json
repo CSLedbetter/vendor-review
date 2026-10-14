@@ -1,0 +1,152 @@
+[
+  {
+    "id": "VR-01",
+    "name": "Tallyhaus Payroll",
+    "summary": "Payroll provider. Clean Type II, but heavy user controls and AWS carved out.",
+    "intake": {
+      "vendor": "Tallyhaus Payroll",
+      "service": "Payroll processing and direct deposit",
+      "data": [
+        "employee",
+        "financial"
+      ],
+      "access": [
+        "stores",
+        "admin"
+      ],
+      "criticality": "high",
+      "ai": "none"
+    },
+    "text": "Tallyhaus Payroll, Inc.\nSOC 2 Type II Report\nReport on Tallyhaus's Description of Its Payroll Processing System and on the Suitability of the Design and Operating Effectiveness of Its Controls Relevant to Security, Availability, Confidentiality, and Privacy\n\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\n\nTo the management of Tallyhaus Payroll, Inc.:\n\nScope\nWe examined Tallyhaus Payroll, Inc.'s description of its Payroll Processing system for the period January 1, 2026 to June 30, 2026, and the suitability of the design and operating effectiveness of controls stated in the description to meet the applicable trust services criteria.\n\nOpinion\nIn our opinion, in all material respects, the description presents the system that was designed and implemented throughout the period, the controls were suitably designed, and the controls operated effectively throughout the period.\n\n/s/ Halvorsen & Pike LLP\nHalvorsen & Pike LLP\nAugust 14, 2026\n\nSECTION 3: SYSTEM DESCRIPTION\nServices provided: Tallyhaus provides payroll processing, tax filing, and direct deposit services to small and mid-size businesses. The applicable trust services criteria are Security, Availability, Confidentiality, and Privacy.\n\nSubservice organizations\nTallyhaus uses Amazon Web Services (AWS) for cloud hosting and data storage. The carve-out method was used, so the controls at AWS are excluded from the scope of this examination.\n\nPenetration testing\nAn independent penetration test of the payroll platform was completed on March 9, 2026. All high findings were remediated.\n\nComplementary User Entity Controls\n- User entities are responsible for approving and removing their own administrator accounts in the Tallyhaus portal.\n- User entities are responsible for reviewing payroll registers before each pay run is released.\n- User entities are responsible for enabling SSO and multi-factor authentication for their users.\n- User entities are responsible for reviewing access to the portal at least quarterly.\n- User entities are responsible for reporting suspected unauthorized access within 24 hours.\n- User entities are responsible for verifying bank account changes requested by employees.\n\nSECTION 4: TESTS OF CONTROLS\nCC6.1 | Access to production requires MFA | Inspected configuration | No exceptions noted.\nCC6.2 | New user access is approved | Inspected 25 of 112 new users | No exceptions noted.\nCC6.3 | Terminated users removed within 1 business day | Inspected 25 of 64 terminations | No exceptions noted.\nCC7.2 | Alerts are reviewed daily | Inspected 40 days of alert reviews | No exceptions noted.\nCC8.1 | Changes are peer reviewed and approved | Inspected 25 of 410 changes | No exceptions noted.\nA1.2 | Backups run daily and restores are tested quarterly | Inspected backup logs and 2 restore tests | No exceptions noted."
+  },
+  {
+    "id": "VR-02",
+    "name": "Relaybird CRM",
+    "summary": "CRM with customer contacts. Qualified opinion over access exceptions.",
+    "intake": {
+      "vendor": "Relaybird CRM",
+      "service": "Customer relationship management for the sales team",
+      "data": [
+        "personal",
+        "confidential"
+      ],
+      "access": [
+        "stores",
+        "admin"
+      ],
+      "criticality": "medium",
+      "ai": "none"
+    },
+    "text": "Relaybird Software Ltd.\nSOC 2 Type II Report\nDescription of the Relaybird CRM Platform for the period April 1, 2025 to March 31, 2026, relevant to the Security and Confidentiality trust services criteria.\n\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\nTo the Board and Management of Relaybird Software Ltd.\n\nBasis for Qualified Opinion\nRelaybird states in its description that access for terminated employees is removed within one business day. As described in Section 4, our tests found that access was not removed in a timely manner for several terminated users, so the control was not operating effectively to meet CC6.3 during the period.\n\nQualified Opinion\nIn our opinion, except for the matter described in the Basis for Qualified Opinion paragraph, in all material respects, the description presents the Relaybird CRM Platform as designed and implemented, and the controls operated effectively throughout the period April 1, 2025 to March 31, 2026.\n\n/s/ Marrow Ridge CPAs, LLC\nMay 20, 2026\n\nSECTION 3: SYSTEM DESCRIPTION\nRelaybird CRM is a customer relationship management platform used by sales teams to track contacts, deals, and customer communications.\n\nSubservice organizations: Relaybird hosts the platform on Google Cloud Platform (GCP). The carve-out method was used.\n\nSECTION 4: TESTS OF CONTROLS\nCC6.1 | MFA is enforced for workforce access | Inspected IdP policy | No exceptions noted.\nCC6.2 | New access is approved by a manager before it is provisioned\nInspected 25 of 140 new access requests | Exception noted: 2 of 25 requests had no documented approval.\nManagement's response: Relaybird has added a required approval step in its ticketing workflow as of February 2026.\nCC6.3 | Access for terminated users is removed within one business day\nInspected 25 of 58 terminations | Exception noted: access was removed between 4 and 23 days late for 6 of 25 terminated users.\nCC7.2 | Security events are logged and reviewed | Inspected 30 days | No exceptions noted.\nC1.1 | Customer data is classified as confidential and encrypted | Inspected configuration | No exceptions noted.\n\nComplementary User Entity Controls\n- User entities are responsible for removing their own users from Relaybird when they leave.\n- User entities are responsible for configuring SSO for their workspace."
+  },
+  {
+    "id": "VR-03",
+    "name": "Murmur Notes",
+    "summary": "AI meeting notes. Type I only, trains on customer recordings, 3-year retention.",
+    "intake": {
+      "vendor": "Murmur Notes",
+      "service": "AI meeting transcription and summaries",
+      "data": [
+        "personal",
+        "confidential"
+      ],
+      "access": [
+        "stores"
+      ],
+      "criticality": "medium",
+      "ai": "features"
+    },
+    "text": "Murmur Labs, Inc.\nSOC 2 Type I Report\nDescription of the Murmur Notes Transcription System as of May 15, 2026, relevant to the Security trust services criteria.\n\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\nWe examined Murmur Labs' description of its Murmur Notes Transcription system as of May 15, 2026, and the suitability of the design of controls to meet the applicable trust services criteria. We did not test operating effectiveness.\n\nOpinion\nIn our opinion, in all material respects, the description presents the system as designed and implemented as of May 15, 2026, and the controls were suitably designed.\n\n/s/ Quillstone Assurance LLP\n\nSECTION 3: SYSTEM DESCRIPTION\nMurmur Notes joins video meetings, records audio, and produces AI transcripts, summaries, and action items.\n\nArtificial intelligence\nMurmur uses large language models from OpenAI to generate summaries. Murmur may use customer recordings and transcripts to train and improve our AI models and speech recognition.\n\nData retention\nRecordings and transcripts are retained for 3 years after a meeting unless the workspace owner deletes them.\n\nSubservice organizations: Amazon Web Services hosts the application (carve-out method). OpenAI is a subservice organization for summarization (carve-out method)."
+  },
+  {
+    "id": "VR-04",
+    "name": "Cargoloop Logistics",
+    "summary": "Shipping partner. Report period ended long ago, no bridge letter.",
+    "intake": {
+      "vendor": "Cargoloop Logistics",
+      "service": "Shipment tracking and label printing",
+      "data": [
+        "personal"
+      ],
+      "access": [
+        "stores"
+      ],
+      "criticality": "medium",
+      "ai": "none"
+    },
+    "text": "Cargoloop Logistics Corp.\nSOC 2 Type II Report\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\n\nTo the management of Cargoloop Logistics Corp.:\n\nScope\nWe examined Cargoloop Logistics Corp.'s description of its Shipment Tracking system for the period January 1, 2024 through December 31, 2024, and the suitability of the design and operating effectiveness of controls stated in the description to meet the applicable trust services criteria.\n\nOpinion\nIn our opinion, in all material respects, the description presents the system that was designed and implemented throughout the period, the controls were suitably designed, and the controls operated effectively throughout the period.\n\n/s/ Halvorsen & Pike LLP\nHalvorsen & Pike LLP\nMarch 3, 2025\n\nSECTION 3: SYSTEM DESCRIPTION\nCargoloop provides shipment tracking, label printing, and delivery notifications. This report covers the Security trust services criteria.\n\nSECTION 4: TESTS OF CONTROLS\nCC6.1 | Unique IDs and MFA are required | Inspected configuration | No exceptions noted.\nCC7.4 | Incidents follow the response plan | Inspected 3 incidents | No exceptions noted."
+  },
+  {
+    "id": "VR-05",
+    "name": "Sketchwell",
+    "summary": "Whiteboard tool for public marketing work. SOC 3 is enough here.",
+    "intake": {
+      "vendor": "Sketchwell",
+      "service": "Online whiteboard for marketing brainstorms",
+      "data": [
+        "none"
+      ],
+      "access": [],
+      "criticality": "low",
+      "ai": "none"
+    },
+    "text": "Sketchwell, Inc. SOC 3 Report\nReport on Sketchwell's Whiteboard System Relevant to Security and Availability for the period July 1, 2025 to June 30, 2026\n\nIndependent Service Auditor's Report\nWe examined management's assertion that Sketchwell maintained effective controls over its Whiteboard system to provide reasonable assurance that its service commitments were achieved based on the trust services criteria relevant to Security and Availability, throughout the period July 1, 2025 to June 30, 2026.\n\nOpinion\nIn our opinion, management's assertion that the controls were effective throughout the period is fairly stated, in all material respects.\n\nMarrow Ridge CPAs, LLC\nAugust 2, 2026"
+  },
+  {
+    "id": "VR-06",
+    "name": "Lockwarden",
+    "summary": "Secrets manager. ISO certificate expired and scope skips the product.",
+    "intake": {
+      "vendor": "Lockwarden",
+      "service": "Secrets vault for production credentials",
+      "data": [
+        "secrets"
+      ],
+      "access": [
+        "production",
+        "stores"
+      ],
+      "criticality": "high",
+      "ai": "none"
+    },
+    "text": "CERTIFICATE OF REGISTRATION\n\nThis is to certify that the Information Security Management System of\nLockwarden Security GmbH\nhas been assessed and found to conform to the requirements of ISO/IEC 27001:2022.\n\nScope: Corporate IT operations, human resources, and finance systems at the Munich office.\n\nCertificate No: NGC-ISMS-40817\nOriginal certification date: September 1, 2023\nExpiry date: August 31, 2026\n\nIssued by: Northgate Certification Services (fictional)"
+  },
+  {
+    "id": "VR-07",
+    "name": "Deskloom",
+    "summary": "Help desk for every customer ticket. Security only in scope, change exception.",
+    "intake": {
+      "vendor": "Deskloom",
+      "service": "Customer support ticketing and help desk",
+      "data": [
+        "personal"
+      ],
+      "access": [
+        "stores"
+      ],
+      "criticality": "high",
+      "ai": "none"
+    },
+    "text": "Deskloom, Inc.\nSOC 2 Type II Report\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\n\nTo the management of Deskloom, Inc.:\n\nScope\nWe examined Deskloom, Inc.'s description of its Help Desk system for the period October 1, 2025 to March 31, 2026, and the suitability of the design and operating effectiveness of controls stated in the description to meet the applicable trust services criteria.\n\nOpinion\nIn our opinion, in all material respects, the description presents the system that was designed and implemented throughout the period, the controls were suitably designed, and the controls operated effectively throughout the period.\n\n/s/ Quillstone Assurance LLP\n\nSECTION 3: SYSTEM DESCRIPTION\nDeskloom provides customer support ticketing, a help desk inbox, and a knowledge base. The trust services criteria in scope for this report are the Security criteria only.\n\nDeskloom completed an external penetration test in January 2026.\n\nSubservice organizations: Deskloom uses Microsoft Azure for hosting under the inclusive method.\n\nSECTION 4: TESTS OF CONTROLS\nCC6.1 | SSO and MFA are required for staff | Inspected configuration | No exceptions noted.\nCC7.2 | Logs are monitored by the security team | Inspected 30 days | No exceptions noted.\nCC8.1 | Changes to production are approved before deployment\nInspected 40 of 820 changes | Exception noted: 3 of 40 changes were deployed before approval was recorded.\nManagement's response: Deskloom added a branch protection rule in March 2026 that blocks merges without an approval.\n\nComplementary User Entity Controls\n- User entities are responsible for removing agents who leave their support team."
+  },
+  {
+    "id": "VR-08",
+    "name": "Paycadence",
+    "summary": "Payment processor. Clean report, but no pen test summary for a Tier 1.",
+    "intake": {
+      "vendor": "Paycadence",
+      "service": "Card payment processing at checkout",
+      "data": [
+        "card",
+        "personal"
+      ],
+      "access": [
+        "stores",
+        "production"
+      ],
+      "criticality": "high",
+      "ai": "none"
+    },
+    "text": "Paycadence Payments, Inc.\nSOC 2 Type II Report\nRelevant to Security, Availability, Confidentiality, and Privacy trust services criteria\n\nSECTION 1: INDEPENDENT SERVICE AUDITOR'S REPORT\n\nTo the management of Paycadence Payments, Inc.:\n\nScope\nWe examined Paycadence Payments, Inc.'s description of its Card Payment Processing system for the period January 1, 2026 to June 30, 2026, and the suitability of the design and operating effectiveness of controls stated in the description to meet the applicable trust services criteria.\n\nOpinion\nIn our opinion, in all material respects, the description presents the system that was designed and implemented throughout the period, the controls were suitably designed, and the controls operated effectively throughout the period.\n\n/s/ Marrow Ridge CPAs, LLC\n\nSECTION 3: SYSTEM DESCRIPTION\nPaycadence provides card payment processing, tokenization, and payouts for online checkout.\nSubservice organizations: Paycadence uses Google Cloud for hosting. The carve-out method was used.\n\nSECTION 4: TESTS OF CONTROLS\nCC6.1 | Cardholder data is tokenized and encrypted | Inspected configuration | No exceptions noted.\nCC6.7 | TLS 1.2 or higher is enforced | Inspected configuration | No exceptions noted.\nCC7.2 | A 24/7 team monitors alerts | Inspected 30 days | No exceptions noted.\nA1.2 | Systems fail over between regions | Inspected failover test | No exceptions noted.\n\nComplementary User Entity Controls\n- User entities are responsible for protecting their API keys.\n- User entities are responsible for reviewing payouts and disputes."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "name": "vendor-review",
+  "private": true,
+  "type": "module",
+  "description": "Tier a vendor at intake, check its SOC 2 or ISO evidence with code, and get a risk decision, memo and register row from Claude.",
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test test/*.test.js", "samples": "python3 data/make_samples.py" }
+}
