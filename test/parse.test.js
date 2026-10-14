@@ -114,6 +114,10 @@ test('criteria IDs normalize and stay inside the fixed list', () => {
   assert.equal(CRITERIA_IDS.length, 61);
 });
 
+test('the browser copy of the tier rules matches the server copy', () => {
+  assert.equal(fs.readFileSync(new URL('../public/tiers.js', import.meta.url), 'utf8'), fs.readFileSync(new URL('../lib/tiers.js', import.meta.url), 'utf8'));
+});
+
 test('each sample matches data/expected.json', () => {
   const vendors = JSON.parse(fs.readFileSync(new URL('../public/vendors.json', import.meta.url)));
   const expected = JSON.parse(fs.readFileSync(new URL('../data/expected.json', import.meta.url)));

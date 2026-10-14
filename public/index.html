@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendor Risk Reviewer</title>
+<meta name="description" content="Tier a vendor at intake, check its SOC 2, SOC 3, or ISO 27001 evidence with code, and get a risk decision, findings mapped to SOC 2 criteria, a security memo, and a risk register row.">
+<link rel="canonical" href="https://vendor-review.caseyledbetter.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vendor-review.caseyledbetter.com/">
+<meta property="og:title" content="Vendor Risk Reviewer">
+<meta property="og:description" content="Third-party risk review in minutes: tier the vendor, check its SOC 2 evidence, and get a decision and memo.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous" defer></script>
+<script src="/config.js" defer></script>
+<script src="/cache.js" defer></script>
+<script src="/auth.js" defer></script>
+<script src="/app.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">GRC tooling demo</p>
+    <h1>Vendor Risk Reviewer</h1>
+    <p class="lede">The first step of a third-party risk review. Describe what the vendor will touch, paste its SOC 2, SOC 3, ISO 27001 certificate, or trust page, and code sets the risk tier and checks the evidence. Claude then makes the call: a decision, findings mapped to SOC 2 criteria, questions for the vendor, terms for Legal, a memo, and a risk register row.</p>
+    <nav class="family" aria-label="Related tools">
+      <a href="https://doc-gap-finder.caseyledbetter.com">Doc Gap Finder</a>
+      <a href="https://api-error-explainer.caseyledbetter.com">API Error Explainer</a>
+      <a href="https://sso-assistant.caseyledbetter.com">SSO Assistant</a>
+      <span aria-current="page">Vendor Risk Reviewer</span>
+    </nav>
+  </header>
+
+  <section class="panel access" id="auth" aria-live="polite"><p class="muted small">Checking sign-in…</p></section>
+
+  <div class="layout">
+    <section class="panel queue" aria-labelledby="queue-h">
+      <div class="sec-head"><h2 id="queue-h">Vendor review queue</h2></div>
+      <button type="button" class="own-btn" id="use-own">Try your own vendor</button>
+      <p class="muted small">Or pick one of these fictional vendors. Each has a problem planted in its report.</p>
+      <ul id="tickets" class="tickets"></ul>
+    </section>
+
+    <div class="col">
+      <section class="panel" aria-labelledby="intake-h">
+        <div class="sec-head">
+          <h2 id="intake-h">Intake</h2>
+          <button type="button" class="link" id="clear">Clear</button>
+        </div>
+        <div id="ticket-chip" class="chip" hidden></div>
+        <div class="intake">
+          <label for="vendor">Vendor name <span class="req">required</span></label>
+          <input id="vendor" maxlength="80" autocomplete="off">
+          <label for="service">Service being bought</label>
+          <input id="service" maxlength="200" autocomplete="off" placeholder="For example: payroll processing and direct deposit">
+        </div>
+        <fieldset class="opts">
+          <legend>Data the vendor will touch</legend>
+          <div class="checks-grid" id="data"></div>
+        </fieldset>
+        <fieldset class="opts">
+          <legend>Access</legend>
+          <div class="checks-grid" id="access"></div>
+        </fieldset>
+        <div class="two-sel">
+          <fieldset class="opts">
+            <legend>Business criticality</legend>
+            <div class="radio-col" id="criticality"></div>
+          </fieldset>
+          <fieldset class="opts">
+            <legend>AI use</legend>
+            <div class="radio-col" id="ai"></div>
+          </fieldset>
+        </div>
+        <div class="tier-preview" id="tier-preview" aria-live="polite"></div>
+
+        <div class="sec-head"><h2 id="doc-h">Vendor’s evidence</h2></div>
+        <label for="input" class="visually-hidden">Report, certificate, or trust page text</label>
+        <textarea id="input" rows="12" maxlength="30000" spellcheck="false" placeholder="Paste the opinion, system description, subservice organizations, complementary user entity controls, and test results. Or a SOC 3 report, an ISO 27001 certificate, or a trust page."></textarea>
+        <div class="actions">
+          <button type="button" id="check-only" disabled>Run checks (free)</button>
+          <button type="button" id="explain" disabled>Run checks and review</button>
+          <span class="muted small" id="count">0 / 30,000</span>
+        </div>
+        <p class="muted small">Running the checks is free and needs no sign-in. The review calls Claude, so it needs an approved sign-in. Keys, tokens, and passwords in the text are removed before anything is sent to Claude.</p>
+        <details class="own" id="own">
+          <summary>Bring your own vendor</summary>
+          <p>Nothing here is canned. The checks run on whatever you paste, and every review shows Claude’s request ID so you can see it was generated just now.</p>
+          <div class="recipe">
+            <div class="recipe-head"><b>Why you can’t paste a real SOC 2 report</b></div>
+            <p>SOC 2 reports are confidential. Vendors share them under NDA, usually through a trust portal, so please don’t paste one here. Use something public instead:</p>
+            <ul class="small">
+              <li><b>A SOC 3 report.</b> It’s the public summary of a SOC 2, and many SaaS and cloud companies post theirs on their trust or security page.</li>
+              <li><b>An ISO 27001 certificate.</b> Often published with its scope and expiry date.</li>
+              <li><b>A trust or security page.</b> Paste the text. It’s a good test of the AI checks, since many describe how customer data is used for training.</li>
+            </ul>
+          </div>
+          <p class="muted small">Fill in the intake for how your company would use the vendor. The tier, and so the verdict, depends on it.</p>
+        </details>
+      </section>
+
+      <section class="panel result" id="result" aria-live="polite" hidden></section>
+    </div>
+  </div>
+
+  <footer class="muted small">
+    Built by <a href="https://caseyledbetter.com">Casey Ledbetter</a> with Claude Code. The sample vendors, auditors, and reports are fictional. Criteria summaries are paraphrased, not the AICPA’s text. Contract terms are items to raise with Legal, not legal advice.
+    <a href="https://github.com/CSLedbetter/vendor-review">Source</a>
+  </footer>
+</div>
+<template id="tpl-checks">
+  <div class="facts-box">
+    <h3 data-f="kind"></h3>
+    <p class="muted small">Tiered and checked by code, before Claude reads anything.</p>
+    <div class="tier-line" data-f="tier"></div>
+    <ul class="checks" data-f="checks"></ul>
+  </div>
+</template>
+<template id="tpl-result">
+  <div class="res-head">
+    <p class="eyebrow">Vendor review</p>
+    <h2 data-f="headline"></h2>
+    <div class="badges" data-f="badges"></div>
+    <p data-f="reason"></p>
+  </div>
+  <div data-f="checks-slot"></div>
+  <div><h3>Findings</h3><ul class="findings" data-f="findings"></ul></div>
+  <div data-f="conditions-wrap"><h3>Conditions</h3><ul data-f="conditions"></ul></div>
+  <div class="two">
+    <div data-f="cuec-wrap"><h3>Controls your team owns</h3><ul class="owned" data-f="cuec"></ul></div>
+    <div data-f="sub-wrap"><h3>Subservice follow-ups</h3><ul data-f="sub"></ul></div>
+  </div>
+  <div data-f="ai-wrap"><h3>AI review</h3><p data-f="ai"></p><ul data-f="ai-concerns"></ul></div>
+  <div class="two">
+    <div><h3>Terms to raise with Legal</h3><ul data-f="terms"></ul></div>
+    <div><h3>Questions for the vendor</h3><ul data-f="questions"></ul></div>
+  </div>
+  <div class="replies">
+    <article class="reply">
+      <header><h3>Memo for the security team</h3><button type="button" class="link copy" data-copy="memo">Copy</button></header>
+      <pre data-f="memo"></pre>
+    </article>
+    <article class="reply">
+      <header><h3>Summary for the business owner</h3><button type="button" class="link copy" data-copy="biz">Copy</button></header>
+      <pre data-f="biz"></pre>
+    </article>
+  </div>
+  <div class="register">
+    <div class="sec-head"><h3>Risk register row</h3><button type="button" class="link copy" data-copy="csv">Copy as CSV</button></div>
+    <div class="table-wrap"><table class="reg"><thead><tr data-f="reg-head"></tr></thead><tbody><tr data-f="reg-row"></tr></tbody></table></div>
+  </div>
+  <p class="meta muted small" data-f="meta"></p>
+</template>
+</body>
+</html>
